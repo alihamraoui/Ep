@@ -4,10 +4,13 @@
 r0=0.9572 # Å
 kb=450.000 #  kcal.mol-1.Å-2
 theteq= 104.5200 #°
-kt= 55.000 #kcal.mol-1.rad-1
-
+kt= 55.000 #kcal.mol-1.rad-1 
+#################################################################
+import math
+import sys
 coors = []
-with open("water2.pdb", "r") as f:
+# Open PDB file & get cartesian coordinates 
+with open(sys.argv[1], "r") as f:
                 for line in f:
                     if line.startswith('ATOM'):
                         iCode = line[25]
@@ -15,9 +18,7 @@ with open("water2.pdb", "r") as f:
                         y = float(line[38:46])
                         z = float(line[46:54])
                         coors.append({"x":x, "y": y, "z":z})
-print (coors)
-
-import math
+#Calculate distances between atomes
 def calc_dist( i, j):
         # i & j are atom numbers.
         xi, yi, zi = coors[i].values()
